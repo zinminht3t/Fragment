@@ -8,12 +8,7 @@
     <fragment
         android:id="@+id/fragment1"
         android:name="me.zinminhtet.fragment.ListingFragment"
-        android:layout_width="125dp"
-        android:layout_height="match_parent" />
-
-    <FrameLayout
-        android:id="@+id/detailsframe"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +31,14 @@ public class ListingFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Item s = (Item) getListAdapter().getItem(position);
-        display(s);
+        if (getActivity().findViewById(R.id.detailsframe) == null) { // there is no defined detailsframe in activity_main (portrait)
+            // single-pane
+            Intent intent = new Intent(getActivity(), DetailsActivity.class);
+            intent.putExtra("details", s);
+            startActivity(intent);
+        } else
+            // multi-pane
+            display(s);
     }
 
     void display(Item details) {

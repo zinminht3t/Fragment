@@ -1,8 +1,9 @@
 package me.zinminhtet.fragment;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import java.util.HashMap;
 
@@ -12,13 +13,16 @@ public class DetailsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-        Bundle b = getIntent().getExtras();
-        HashMap<String,String> item = (HashMap<String,String>) b.get("item");
-        TextView t2 = (TextView) findViewById(R.id.textView2);
-        t2.setText(item.get("id"));
-        TextView t4 = (TextView) findViewById(R.id.textView4);
-        t4.setText(item.get("description"));
-        TextView t6 = (TextView) findViewById(R.id.textView6);
-        t6.setText(item.get("cost"));
+        Intent intent = getIntent();
+        if (intent.hasExtra("details")) {
+            HashMap<String, String> m = (HashMap<String, String>) intent.getSerializableExtra("details");
+            Bundle args = new Bundle();
+            args.putSerializable("item", m);
+            Fragment f = new DetailsFragment();
+            f.setArguments(args);
+            getFragmentManager().beginTransaction()
+                    .add(R.id.detailsframe2, f)
+                    .commit();
+        }
     }
 }
